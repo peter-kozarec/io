@@ -119,5 +119,3 @@ int main(int argc, char ** argv)
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-Feel free to customize this README template further based on your project's specific details and requirements.
