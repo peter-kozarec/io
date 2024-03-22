@@ -15,15 +15,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
-    - name: Set up CMake
-      uses: cmake/setup-cmake@v1
-      with:
-        cmake-version: '3.21'
+
+    - name: Install CMake
+      run: |
+        sudo apt-get update
+        sudo apt-get install cmake
 
     - name: Install Boost and OpenSSL dependencies
       run: |
-        sudo apt-get update
         sudo apt-get install libboost-all-dev libssl-dev
 
     - name: Configure and build
