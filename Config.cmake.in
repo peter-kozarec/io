@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+include("${CMAKE_CURRENT_LIST_DIR}/libioTargets.cmake")
+
+# Config file version
+include("${CMAKE_CURRENT_LIST_DIR}/libioConfigVersion.cmake")
+
+set(LIBIO_LIBRARIES io)
+
+
+# Import targets
+set_property(TARGET io APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/include")

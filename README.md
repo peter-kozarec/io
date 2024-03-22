@@ -48,18 +48,22 @@ Follow these steps to build the libio library:
 
 ## Usage
 
-To use the libio library in your C++ project, follow these steps:
-
-1. Include the necessary headers in your source files:
-
-   ```cpp
-   
-   ```
-
-2. Link against the libio library in your CMakeLists.txt:
+To use the libio library in your C++ project, using cmake:
 
    ```cmake
+   cmake_minimum_required(VERSION 3.15)
+   project(libio_test)
+
+   set(CMAKE_CXX_STANDARD 20)
    
+   find_package(libio REQUIRED)
+   find_package(Boost COMPONENTS system log REQUIRED)
+   find_package(OpenSSL REQUIRED)
+   
+   add_executable(libio_test main.cpp)
+   
+   target_link_libraries(libio_test PRIVATE ${LIBIO_LIBRARIES})
+   target_compile_options(libio_test PRIVATE "-fcoroutines")
    ```
 
 3. Start using libio's asynchronous I/O functionality in your code.
@@ -69,6 +73,44 @@ To use the libio library in your C++ project, follow these steps:
 Here's a simple example demonstrating how to perform asynchronous I/O with libio:
 
 ```cpp
+#include "io/websocket.hpp"
+#include <iostream>
+
+
+class Observer final : public io::WebsocketObserver
+{
+public:
+    ~Observer() override = default;
+
+    boost::asio::awaitable<void> on_recieved(const std::string & message)
+    {
+        std::cout << message << std::endl;
+        co_return;
+    }
+};
+
+int main(int argc, char ** argv)
+{
+    const auto observer = std::make_shared<Observer>();
+    io::Websocket websocket(observer);
+
+    websocket.set_host("echo.websocket.org");
+    websocket.set_port("443");
+    websocket.set_target(".ws");
+
+    boost::asio::io_context context;
+
+    boost::asio::co_spawn(context, [&websocket]() -> boost::asio::awaitable<void>
+        {
+            co_await websocket.connect();
+            co_await websocket.send("Hello World");
+            co_await websocket.listen();
+        }, boost::asio::detached);
+
+    context.run();
+
+    return EXIT_SUCCESS;
+}
 
 ```
 

@@ -1,12 +1,10 @@
-SET(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_LIBS ON)
 
 find_package(Boost COMPONENTS system log REQUIRED)
 find_package(OpenSSL REQUIRED)
 
-# Create target for the foundation library
 add_library(io)
 
-# Specifies sources to use when building a target
 target_sources(io
         PRIVATE
             src/requests.cpp
@@ -16,7 +14,6 @@ target_sources(io
             src/websocket_endpoint.cpp
 )
 
-# Specifies include directories for given target
 target_include_directories(io
         PUBLIC
             $<INSTALL_INTERFACE:include>
@@ -25,22 +22,49 @@ target_include_directories(io
             include
 )
 
-# Specify libraries or flags for given target
-target_link_libraries(io
-        PRIVATE
-            ${Boost_LIBRARIES}
-            ${OPENSSL_LIBRARIES}
+target_link_libraries(io PRIVATE ${Boost_LIBRARIES} ${OPENSSL_LIBRARIES})
+target_compile_options(io PRIVATE "-fcoroutines")
+target_compile_definitions(io PRIVATE "BOOST_ALLOW_DEPRECATED_HEADERS" "BOOST_LOG_DYN_LINK=1")
+
+# Export targets
+install(TARGETS io
+        EXPORT libioTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
 )
 
-# Specify compile options
-target_compile_options(io
-        PRIVATE
-            "-fcoroutines"
+# Headers
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/io
+        DESTINATION include
 )
 
-# Specify compile definitions
-target_compile_definitions(io
-        PRIVATE
-            "BOOST_ALLOW_DEPRECATED_HEADERS"
-            "BOOST_LOG_DYN_LINK=1"
+# Target cmake file
+install(EXPORT libioTargets
+        FILE libioTargets.cmake
+        DESTINATION lib/cmake/libio
+)
+
+# Config cmake file
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+        "${CMAKE_SOURCE_DIR}/Config.cmake.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/libioConfig.cmake"
+        INSTALL_DESTINATION "lib/cmake/libio"
+)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libioConfig.cmake"
+        DESTINATION "lib/cmake/libio"
+)
+
+# Config Version cmake file
+write_basic_package_version_file(
+        "${CMAKE_CURRENT_BINARY_DIR}/libioConfigVersion.cmake"
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libioConfigVersion.cmake"
+        DESTINATION "lib/cmake/libio"
 )
