@@ -1,3 +1,4 @@
+[![C++ Build](https://github.com/peter-kozarec/libio/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/peter-kozarec/libio/actions/workflows/cmake-multi-platform.yml)
 # libio: C++ Library for Asynchronous I/O with Boost.Asio and C++20 Coroutines
 
 libio is a C++ library that provides asynchronous I/O functionality using Boost.Asio and C++20 coroutines. It simplifies the development of asynchronous I/O operations by leveraging the power of coroutines while benefiting from the robustness and performance of Boost.Asio.
