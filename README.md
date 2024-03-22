@@ -68,8 +68,6 @@ To use the libio library in your C++ project, using cmake:
    target_compile_options(libio_test PRIVATE "-fcoroutines")
    ```
 
-3. Start using libio's asynchronous I/O functionality in your code.
-
 ## Example
 
 Here's a simple example demonstrating how to perform asynchronous I/O with libio:
