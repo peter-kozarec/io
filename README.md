@@ -97,7 +97,7 @@ int main(int argc, char ** argv)
 
     websocket.set_host("echo.websocket.org");
     websocket.set_port("443");
-    websocket.set_target(".ws");
+    websocket.set_target("/.ws");
 
     boost::asio::io_context context;
 
