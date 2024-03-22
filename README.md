@@ -12,8 +12,8 @@ libio is a C++ library that provides asynchronous I/O functionality using Boost.
 
 Before building and using the io library, make sure you have the following dependencies installed:
 
-- CMake (version 3.16 or higher)
-- Boost (version 1.75.0 or higher) with Boost.Asio and Boost.Beast support
+- CMake (version 3.15 or higher)
+- Boost (version 1.84.0 or higher) with Boost.Asio and Boost.Beast support
 - A C++20-compliant compiler (such as GCC 10 or Clang 11)
 - OpenSSL
 
