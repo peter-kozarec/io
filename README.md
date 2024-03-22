@@ -1,6 +1,6 @@
-# io: C++ Library for Asynchronous I/O with Boost.Asio and C++20 Coroutines
+# libio: C++ Library for Asynchronous I/O with Boost.Asio and C++20 Coroutines
 
-io is a C++ library that provides asynchronous I/O functionality using Boost.Asio and C++20 coroutines. It simplifies the development of asynchronous I/O operations by leveraging the power of coroutines while benefiting from the robustness and performance of Boost.Asio.
+libio is a C++ library that provides asynchronous I/O functionality using Boost.Asio and C++20 coroutines. It simplifies the development of asynchronous I/O operations by leveraging the power of coroutines while benefiting from the robustness and performance of Boost.Asio.
 
 ## Features
 
@@ -18,18 +18,18 @@ Before building and using the io library, make sure you have the following depen
 
 ## Building
 
-Follow these steps to build the io library:
+Follow these steps to build the libio library:
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/peter-kozarec/io.git
+   git clone https://github.com/peter-kozarec/libio.git
    ```
 
 2. Create a build directory and navigate into it:
 
    ```bash
-   cd io
+   cd libio
    mkdir build
    cd build
    ```
@@ -48,7 +48,7 @@ Follow these steps to build the io library:
 
 ## Usage
 
-To use the io library in your C++ project, follow these steps:
+To use the libio library in your C++ project, follow these steps:
 
 1. Include the necessary headers in your source files:
 
@@ -56,17 +56,17 @@ To use the io library in your C++ project, follow these steps:
    
    ```
 
-2. Link against the io library in your CMakeLists.txt:
+2. Link against the libio library in your CMakeLists.txt:
 
    ```cmake
    
    ```
 
-3. Start using io's asynchronous I/O functionality in your code.
+3. Start using libio's asynchronous I/O functionality in your code.
 
 ## Example
 
-Here's a simple example demonstrating how to perform asynchronous I/O with io:
+Here's a simple example demonstrating how to perform asynchronous I/O with libio:
 
 ```cpp
 
