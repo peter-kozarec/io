@@ -1,0 +1,34 @@
+name: C++ Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up CMake
+      uses: tracyone/cmake-action@v1
+      with:
+        cmake-version: '3.21'
+
+    - name: Install Boost and OpenSSL dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libboost-all-dev libssl-dev
+
+    - name: Configure and build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
