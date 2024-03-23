@@ -30,7 +30,7 @@ namespace io::priv
         boost::asio::awaitable<bool> connect() noexcept override;
         boost::asio::awaitable<bool> disconnect() noexcept override;
 
-        boost::asio::awaitable<void> write(std::string_view message) override;
+        boost::asio::awaitable<void> write(const std::string & message) override;
         boost::asio::awaitable<std::string> read() override;
 
         void set_target(const std::string & target);

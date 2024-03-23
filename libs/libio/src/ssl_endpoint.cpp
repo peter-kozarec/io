@@ -61,7 +61,7 @@ boost::asio::awaitable<bool> io::priv::SslEndpoint::disconnect() noexcept
     co_return true;
 }
 
-boost::asio::awaitable<void> io::priv::SslEndpoint::write(std::string_view message)
+boost::asio::awaitable<void> io::priv::SslEndpoint::write(const std::string & message)
 {
     if (!socket_ || !socket_->lowest_layer().is_open())
     {

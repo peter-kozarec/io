@@ -60,7 +60,7 @@ boost::asio::awaitable<bool> io::Websocket::disconnect() noexcept
     co_return co_await impl_->endpoint.disconnect();
 }
 
-boost::asio::awaitable<void> io::Websocket::send(std::string_view message)
+boost::asio::awaitable<void> io::Websocket::send(const std::string & message)
 {
     co_await impl_->endpoint.write(message);
 }

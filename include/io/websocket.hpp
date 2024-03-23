@@ -35,7 +35,7 @@ namespace io
         boost::asio::awaitable<bool> connect() noexcept;
         boost::asio::awaitable<bool> disconnect() noexcept;
 
-        boost::asio::awaitable<void> send(std::string_view message);
+        boost::asio::awaitable<void> send(const std::string & message);
         boost::asio::awaitable<void> listen();
     };
 }

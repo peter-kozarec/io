@@ -12,9 +12,7 @@ boost::asio::awaitable<bool> io::priv::WebsocketEndpoint::connect() noexcept
 
     try
     {
-        const auto executor = co_await boost::asio::this_coro::executor;
-
-        boost::asio::ip::tcp::socket tcp_socket(executor);
+        boost::asio::ip::tcp::socket tcp_socket(co_await boost::asio::this_coro::executor);
 
         const auto endpoints = co_await resolve(host(), port());
         co_await boost::asio::async_connect(tcp_socket, endpoints, boost::asio::use_awaitable);
@@ -27,8 +25,6 @@ boost::asio::awaitable<bool> io::priv::WebsocketEndpoint::connect() noexcept
         co_await ssl_stream.async_handshake(boost::asio::ssl::stream_base::client, boost::asio::use_awaitable);
 
         socket_ = std::make_unique<SocketType>(std::move(ssl_stream));
-
-        //https://stackoverflow.com/questions/69458228/boost-websocket-handshake-was-declined-by-the-remote-peer  ------ check
         socket_->handshake(host(), target_);
 
         BOOST_LOG_TRIVIAL(debug) << "ws://" << host() << target() << " connected";
@@ -60,7 +56,7 @@ boost::asio::awaitable<bool> io::priv::WebsocketEndpoint::disconnect() noexcept
     co_return true;
 }
 
-boost::asio::awaitable<void> io::priv::WebsocketEndpoint::write(std::string_view message)
+boost::asio::awaitable<void> io::priv::WebsocketEndpoint::write(const std::string & message)
 {
     if (!socket_ || !socket_->is_open())
     {

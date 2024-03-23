@@ -27,7 +27,7 @@ namespace io::priv
         virtual boost::asio::awaitable<bool> connect() noexcept = 0;
         virtual boost::asio::awaitable<bool> disconnect() noexcept = 0;
 
-        virtual boost::asio::awaitable<void> write(std::string_view message) = 0;
+        virtual boost::asio::awaitable<void> write(const std::string &message) = 0;
         virtual boost::asio::awaitable<std::string> read() = 0;
 
         void set_host(const std::string & host);
