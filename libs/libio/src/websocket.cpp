@@ -70,7 +70,7 @@ boost::asio::awaitable<void> io::Websocket::listen()
     for (;;)
     {
         const auto result = co_await impl_->endpoint.read();
-
+        
         if (const auto observer = impl_->observer.lock())
         {
             co_await observer->on_recieved(result);
