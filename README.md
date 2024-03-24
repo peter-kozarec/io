@@ -48,6 +48,12 @@ Follow these steps to build the libio library:
    cmake --build .
    ```
 
+5. Install the library:
+
+   ```bash
+   cmake --build . --target install
+   ```
+
 ## Usage
 
 To use the libio library in your C++ project, using cmake:
@@ -116,6 +122,6 @@ int main(int argc, char ** argv)
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License. See the [LICENSE](LICENSE) file for details.
 
 ---
