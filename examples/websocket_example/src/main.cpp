@@ -7,7 +7,7 @@ class Observer final : public io::WebsocketObserver
 public:
     ~Observer() override = default;
 
-    boost::asio::awaitable<void> on_recieved(const std::string & message)
+    void on_recieved(const std::string & message)
     {
         std::cout << message << std::endl;
         co_return;
